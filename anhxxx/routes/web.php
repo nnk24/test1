@@ -29,6 +29,15 @@ Route::get('khac/lien-he', 'frontend\FaqController@index')->name('faq');
 Route::post('khac/lien-he', 'frontend\FaqController@submit')->name('postFaq');
 //notfound
 Route::fallback('frontend\ImageController@notfound');
+//site map
+Route::group(['prefix'=>'sitemap'], function () {
+    Route::get('index', 'SitemapController@index');
+    Route::get('image', 'SitemapController@image');
+    Route::get('type', 'SitemapController@type');
+    Route::get('region', 'SitemapController@region');
+    Route::get('continent', 'SitemapController@continent');
+    Route::get('tag', 'SitemapController@tag');
+});
 
 //backend
 Route::group(['prefix'=>'admin'], function () {

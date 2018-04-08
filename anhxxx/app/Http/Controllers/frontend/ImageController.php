@@ -176,7 +176,6 @@ class ImageController extends Controller
         //tag
         $tag = Tags::first();
         $tags = array();
-        $tags['name'] = explode(",", $tag->name);
         $tags['name_seo'] = explode(",", $tag->name_seo);
         //region
         $regions = Regions::limit($this->limit_region)->get();
