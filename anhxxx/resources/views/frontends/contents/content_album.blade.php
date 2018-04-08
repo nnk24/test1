@@ -1,5 +1,5 @@
 <section>
-    <nav class="m-margin-top-57px fixed-top bg-light" id="m-nav-tab">
+    <nav class="m-margin-top-57px fixed-top bg-light">
         <nav class="breadcrumb">
             <div class="container">
                 <a class="breadcrumb-item" href="{{url('/')}}" data-toggle="tooltip" data-placement="bottom"
@@ -19,9 +19,8 @@
         </nav>
     </nav>
     <main>
-        <div class="tab-content mt-5" id="nav-tabContent">
-            <div class="tab-pane fade m-margin-top-150px show active" id="nav-profile" role="tabpanel"
-                 aria-labelledby="nav-profile-tab">
+        <div class="tab-content mt-5" >
+            <div class="m-margin-top-150px">
                 <div class="container-fluid">
                     <div class="m-margin-top-bottom-30px">
 
@@ -71,6 +70,7 @@
 
                                 <div class="col-md-3">
                                     @include('frontends.includes.menu.menu_type')
+                                    @include('frontends.includes.menu.menu_region')
                                     @include('frontends.includes.menu.menu_relationship')
                                 </div>
                             </div>

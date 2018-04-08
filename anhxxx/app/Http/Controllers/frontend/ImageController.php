@@ -77,7 +77,7 @@ class ImageController extends Controller
         $update = Groups::where('id', '=', 1)->with(['image' => function ($q) {
             $q->where('status', '=', 1)->orderBy('id', 'DESC');
         }])->first();
-
+//top img
         $top_image = Images::where('status', 1)->orderBy('view', 'DESC')->limit($this->top_view_show)->get();
 
         $count_img = Images::where([['group_id', '=', 1], ['status', '=', 1],
@@ -108,6 +108,10 @@ class ImageController extends Controller
         $post = Groups::where([['status', '=', 1], ['name_seo', $id]])->with('region')->first();
 //        $tag_old = $post->tag;
         $types = Types::all();
+        //region
+        $regions = Regions::limit($this->limit_region)->get();
+        //url_img
+        $first_url_image = $this->first_url_image;
 
         if (isset($post)) {
             $post_relationship = Groups::where([['status', '=', 1], ['id', '<>', $post->id]])
@@ -124,6 +128,7 @@ class ImageController extends Controller
             $images = Images::where([['Group_id', '=', $post->id], ['status', '=', 1]])->orderby('id', 'DESC')
                 ->paginate($this->show_img_album);
 //            return $images;
+            //url_img
             $first_url_image = $this->first_url_image;
             Event::fire(URL::current(), $post);
             $view_current_new = $post->view;
@@ -132,7 +137,7 @@ class ImageController extends Controller
             $view->topView7($post->id, $view_current_old, $view_current_new);
         }
         return view('frontends.album', compact('post', 'images', 'types', 'first_url_image', 'continent',
-            'post_relationship', 'tags'));
+            'post_relationship', 'tags', 'regions'));
     }
 
     public function group($id)
@@ -367,5 +372,14 @@ class ImageController extends Controller
             Event::fire(URL::current(), $image);
 //        return $image->url;
         return view('frontends.show', compact('first_url_image', 'image', 'group'));
+    }
+
+    public function notfound () {
+        $regions = Regions::limit($this->limit_region)->get();
+        $first_url_image = $this->first_url_image;
+        $top_image = Images::where('status', 1)->orderBy('view', 'DESC')->limit($this->top_view_show)->get();
+        $types = Types::all();
+
+        return view('frontends.notfound', compact('regions', 'first_url_image', 'top_image', 'types'));
     }
 }

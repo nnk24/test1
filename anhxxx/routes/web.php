@@ -24,9 +24,11 @@ Route::get('hinh-anh/{id}', 'frontend\ImageController@image')->name('image')->mi
 Route::get('tim-kiem/{id}', 'SearchController@search')->name('search');
 Route::get('tim-kiem/{id}/bai-viet', 'frontend\ImageController@searchPost')->name('searchPost');
 Route::get('tim-kiem/{id}/hinh-anh', 'frontend\ImageController@searchImage')->name('searchImage');
-
+//faq
 Route::get('khac/lien-he', 'frontend\FaqController@index')->name('faq');
 Route::post('khac/lien-he', 'frontend\FaqController@submit')->name('postFaq');
+//notfound
+Route::fallback('frontend\ImageController@notfound');
 
 //backend
 Route::group(['prefix'=>'admin'], function () {
